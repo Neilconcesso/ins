@@ -1,49 +1,32 @@
-def create_playfair_matrix(key):
-    key=key.upper().replace('J','I')
-    matrix=[]
-    set_=set()
-    for char in key:
-        if char.isalpha():
-            if char not in set_:
-                matrix.append(char)
-                set_.add(char)
-    for char in"ABCDEFGHIJKLMNOPQRSTUVWXYZ":
-        if char.isalpha():
-            if char not in set_:
-                matrix.append(char)
-                set_.add(char)
-    return[matrix[i:i+5] for i in range(0,25,5)]
+plaintxt_letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+                 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+                 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+cipher_letters = ['D', 'W', 'S', 'N', 'T', 'M', 'U', 'I', 'O', 'P', 'A', 'E', 'Q', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V','B', 'R', 'Y']
+#encoding
+def encode(plain_txt):
+    encrypted_code=""
+    for i in plain_txt:
+        if i<'a'or i>'z':
+            continue
+        for j in range(26):
+            if i==plaintxt_letters[j]:
+                encrypted_code += cipher_letters[j]
+                break
+    return encrypted_code
 
-def find_position(matrix, char):
-    for row in range(5):
-        for col in range(5):
-            if matrix[row][col] == char:
-                return row, col
-            
-def playfair_encrypt(plaintext, key):
-    matrix = create_playfair_matrix(key)
-    plaintext = plaintext.upper().replace("J", "I").replace(" ", "")
-    if len(plaintext) % 2 != 0:
-        plaintext += "X"  
-
-    ciphertext = ""
-    for i in range(0, len(plaintext), 2):
-        a, b = plaintext[i], plaintext[i + 1]
-        row1, col1 = find_position(matrix, a)
-        row2, col2 = find_position(matrix, b)
-        if row1 == row2:
-            ciphertext += matrix[row1][(col1 + 1) % 5] + matrix[row2][(col2 + 1) % 5]
-            
-        elif col1 == col2:
-            ciphertext += matrix[(row1 + 1) % 5][col1] + matrix[(row2 + 1) % 5][col2]
-            
-        else:
-            ciphertext += matrix[row1][col2] + matrix[row2][col1]
-            
-    return ciphertext
-    
-
-plaintext=input("Enter the msg:")
-key=input("Enter the key:")
-result=playfair_encrypt(plaintext, key)
-print(result)
+#decoding
+def decode(cipher_txt):
+    decrypted_code=""
+    for i in cipher_txt:
+        if i<'A'or i>'Z':
+            decrypted_code += i
+            continue
+        for j in range(26):
+            if i == cipher_letters[j]:
+                decrypted_code += plaintxt_letters[j]
+                break
+    return decrypted_code
+plain_txt=input("enter the plain text:")
+print(encode(plain_txt))
+cipher_txt=input("the Ciphertext:")
+print(decode(cipher_txt))
