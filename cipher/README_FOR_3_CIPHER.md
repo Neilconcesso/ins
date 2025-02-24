@@ -14,7 +14,7 @@ The Caesar Cipher is a simple shift cipher that replaces each letter in the plai
 
 #### Example:
 **Input:** HELLO (Shift: 4)  
-**Output:** LIPPS
+**Encrypted Output:** LIPPS
 
 #### Code Usage:
 ```python
@@ -39,7 +39,7 @@ The Playfair Cipher encrypts text in digraphs (pairs of letters) using a 5x5 mat
 #### Example:
 **Key:** MONARCHY  
 **Input:** HELLO  
-**Output:** encrypted text
+**Encrypted Output:** ZEBBW (Example output, depends on the key)
 
 #### Code Usage:
 ```python
@@ -61,7 +61,7 @@ A simple substitution cipher where each letter in the plaintext is replaced with
 **Mapping:** A → D, B → W, C → S, ...
 
 **Input:** hello  
-**Output:** encrypted text (e.g., DWN...)
+**Encrypted Output:** DWN... (Depends on predefined mapping)
 
 #### Code Usage:
 ```python
@@ -70,21 +70,4 @@ print(encode(plain_txt))
 cipher_txt = input("The Ciphertext:")
 print(decode(cipher_txt))
 ```
-
----
-
-## Features
-- Implements three different encryption techniques.
-- Supports both encryption and decryption (except Playfair and Caesar decryption not implemented yet).
-- Uses standard Python libraries for easy execution.
-- Demonstrates fundamental cryptographic principles.
-
-## Future Enhancements
-- Implement decryption for Playfair and Caesar Ciphers.
-- Allow user-defined alphabets for Monoalphabetic Cipher.
-- Add support for more complex cryptographic techniques.
-
-## License
-This project is open-source under the MIT License.
-
 
